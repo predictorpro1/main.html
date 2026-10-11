@@ -3,13 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Fednowshares Dashboard</title>
+<title>Account Dashboard</title>
 
 <style>
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
@@ -19,27 +16,15 @@
     --purple: #565cf0;
     --teal: #299e91;
     --text: #566065;
-    --light: #c4d2ec;
+    --pale: #c4d2ec;
 }
 
-body {
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
     font-family: Arial, Helvetica, sans-serif;
-    background: #ffffff;
     color: var(--text);
-    overflow-x: hidden;
-}
-
-/* TOP NAVIGATION */
-
-.topbar {
-    height: 272px;
-    width: 100%;
-    background: #ffffff;
-    border-bottom: 1px solid #ededed;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    padding: 0 8.5% 39px;
 }
 
 button {
@@ -47,500 +32,340 @@ button {
     cursor: pointer;
 }
 
-.back-button {
-    border: none;
-    background: transparent;
-    color: var(--blue);
-    font-size: 39px;
-    font-weight: 300;
-    line-height: 1;
+/* TOP NAVIGATION */
+
+.topbar {
+    height: 136px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 8.5% 20px;
 }
 
-.navigation {
+.back {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--blue);
+}
+
+.nav {
     display: flex;
     align-items: center;
-    gap: 43px;
+    gap: 28px;
 }
 
-.navigation button {
-    border: none;
-}
-
-.home-button {
-    width: 85px;
-    height: 68px;
-    background: var(--blue);
-    color: #ffffff;
-    border-radius: 9px;
-    font-size: 37px;
-}
-
-.arrow-button,
-.profile-button {
-    background: transparent;
+.nav button {
+    border: 0;
+    background: none;
     color: #26343a;
-    font-size: 31px;
 }
 
-.arrow-button {
-    margin-left: 15px;
+.nav .home {
+    width: 61px;
+    height: 50px;
+    border-radius: 7px;
+    background: var(--blue);
+    color: #fff;
+    padding: 17px;
 }
 
-.profile-button {
-    margin-left: 0;
+.nav .down,
+.nav .user {
+    width: 28px;
+    height: 28px;
+    padding: 5px;
 }
 
-/* PAGE LAYOUT */
+svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
 
-.container {
-    width: calc(100% - 84px);
-    max-width: 1000px;
-    margin: 43px auto 0;
+/* MAIN CONTENT */
+
+.page {
+    width: calc(100% - 42px);
+    max-width: 780px;
+    margin: 0 auto;
 }
 
 /* BALANCE CARD */
 
-.balance-card {
+.balance {
     background: var(--navy);
-    color: white;
-    border-radius: 9px;
-    padding: 21px 32px 27px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 13px 16px 14px;
 }
 
-.balance-heading {
+.heading {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 35px;
+    gap: 8px;
+    margin-bottom: 16px;
 }
 
-.balance-heading h1 {
-    font-size: 39px;
+h1 {
+    font-size: clamp(20px, 5vw, 28px);
+    line-height: 1.15;
+    margin: 7px 0 0;
     font-weight: 750;
-    line-height: 1.2;
-    margin-top: 15px;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
 }
 
-.wallet-label {
-    background: #ffffff;
+.tag {
+    background: #fff;
     color: #101c22;
-    font-size: 20px;
+    border-radius: 5px;
+    padding: 7px 11px;
+    font-size: 10px;
+    line-height: 1.1;
     font-weight: 800;
     text-align: center;
-    padding: 14px 21px;
-    border-radius: 9px;
-    min-width: 120px;
+    white-space: nowrap;
 }
 
-.wallet-row {
+.wallet {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 32px;
+    gap: 9px;
+    margin-bottom: 13px;
 }
 
-.wallet-row:last-child {
-    margin-bottom: 12px;
+.wallet:last-child {
+    margin-bottom: 0;
 }
 
-.wallet-icon {
-    width: 39px;
+.icon {
+    width: 23px;
+    height: 23px;
     flex-shrink: 0;
-    text-align: center;
-    font-size: 30px;
     color: #d5e0f4;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.wallet-name {
+.name {
     flex: 1;
-    color: var(--light);
-    font-size: 33px;
+    color: var(--pale);
+    font-size: clamp(17px, 4.1vw, 29px);
     font-weight: 700;
 }
 
-.wallet-amount {
-    color: #ffffff;
-    font-size: 33px;
+.amount {
+    font-size: clamp(17px, 4.1vw, 29px);
     font-weight: 750;
     white-space: nowrap;
 }
 
-/* ACTION BUTTONS */
+/* DEPOSIT AND INVEST BUTTONS */
 
 .actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 31px;
-    margin-top: 21px;
-    margin-bottom: 42px;
+    gap: 15px;
+    margin: 10px 0 20px;
 }
 
-.action-button {
-    height: 94px;
-    border: none;
-    border-radius: 9px;
-    color: #ffffff;
-    font-size: 32px;
-    font-weight: 400;
+.action {
+    height: 47px;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    font-size: clamp(16px, 4vw, 22px);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 13px;
-    transition: opacity 0.2s;
+    gap: 9px;
 }
 
-.action-button:active {
-    opacity: 0.8;
+.action svg {
+    width: 19px;
+    height: 19px;
 }
 
-.deposit-button {
+.deposit {
     background: var(--purple);
 }
 
-.invest-button {
+.invest {
     background: var(--teal);
 }
 
-.action-icon {
-    font-size: 32px;
-    font-weight: 300;
-}
-
-/* MENU */
+/* SIDEBAR MENU */
 
 .menu {
-    border-top: 1px solid #eeeeee;
-    margin-left: -42px;
-    margin-right: -42px;
-    padding: 31px 42px 80px;
+    border-top: 1px solid #eee;
+    padding: 24px 0 25px;
 }
 
-.menu-item {
+.item {
+    width: 100%;
+    min-height: 54px;
     display: flex;
     align-items: center;
-    width: 100%;
-    min-height: 108px;
-    padding: 0 60px;
-    gap: 23px;
-    border: none;
-    background: #ffffff;
-    color: var(--text);
+    gap: 12px;
+    padding: 0 31px;
+    border: 0;
+    background: #fff;
     text-align: left;
-    font-size: 27px;
+    color: var(--text);
+    font-size: clamp(15px, 4vw, 19px);
     font-weight: 750;
 }
 
-.menu-item:active {
-    background: #f8f9fa;
+.item:active {
+    background: #fafafa;
 }
 
-.menu-icon {
-    width: 34px;
+.item-icon {
+    width: 17px;
+    height: 17px;
     flex-shrink: 0;
-    font-size: 30px;
-    font-weight: 400;
-    text-align: center;
-    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.menu-arrow {
+.arrow {
     margin-left: auto;
     color: var(--blue);
-    font-size: 25px;
+    font-size: 16px;
 }
 
-.submenu.hidden {
-    display: none;
-}
+/* CHAT BUTTON */
 
-.submenu .menu-item {
-    min-height: 78px;
-    padding-left: 100px;
-    font-size: 21px;
-}
-
-/* FLOATING CHAT BUTTON */
-
-.chat-button {
+.chat {
     position: fixed;
-    right: 27px;
-    bottom: 255px;
-    width: 119px;
-    height: 119px;
-    background: #1760ed;
-    border: none;
+    right: 19px;
+    bottom: 100px;
+    width: 72px;
+    height: 72px;
+    border: 0;
     border-radius: 50%;
-    box-shadow: 0 5px 22px rgba(0, 0, 0, 0.12);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 15;
+    background: #1760ed;
+    display: grid;
+    place-items: center;
+    z-index: 4;
+    box-shadow: 0 4px 15px #0002;
 }
 
-.chat-bubble {
-    width: 54px;
-    height: 38px;
+.bubble {
+    width: 36px;
+    height: 26px;
+    background: #fff;
     border-radius: 50%;
-    background: #ffffff;
     position: relative;
 }
 
-.chat-bubble::after {
+.bubble::after {
     content: "";
     position: absolute;
-    left: 9px;
-    bottom: -6px;
-    width: 15px;
-    height: 15px;
-    background: #ffffff;
+    left: 6px;
+    bottom: -4px;
+    width: 10px;
+    height: 10px;
+    background: #fff;
     transform: rotate(30deg);
     border-radius: 2px;
 }
 
-.online-dot {
+.online {
     position: absolute;
-    width: 32px;
-    height: 32px;
-    background: #45d889;
-    border: 4px solid white;
+    left: 0;
+    bottom: 0;
+    width: 22px;
+    height: 22px;
+    border: 3px solid #fff;
     border-radius: 50%;
-    left: 2px;
-    bottom: 3px;
+    background: #45d889;
 }
 
 /* NOTIFICATION */
 
-.notification {
+.toast {
     display: none;
     position: fixed;
-    top: 20px;
+    top: 12px;
     left: 50%;
     transform: translateX(-50%);
-    width: max-content;
-    max-width: 90%;
-    padding: 14px 20px;
     background: var(--navy);
-    color: white;
-    border-radius: 9px;
-    font-size: 15px;
-    text-align: center;
-    z-index: 30;
+    color: #fff;
+    padding: 11px 16px;
+    border-radius: 7px;
+    z-index: 8;
+    font-size: 14px;
 }
 
-.notification.show {
+.toast.show {
     display: block;
 }
 
-/* MOBILE DESIGN */
+/* MOBILE SIZING */
 
-@media (max-width: 600px) {
-
-    .topbar {
-        height: 272px;
-        padding: 0 8.5% 39px;
+@media (max-width: 380px) {
+    .page {
+        width: calc(100% - 42px);
     }
 
-    .navigation {
-        gap: 27px;
+    .balance {
+        padding: 13px 12px 15px;
     }
 
-    .home-button {
-        width: 85px;
-        height: 68px;
+    .heading {
+        margin-bottom: 14px;
     }
 
-    .arrow-button {
-        margin-left: 5px;
+    .wallet {
+        gap: 6px;
+        margin-bottom: 12px;
     }
 
-    .container {
-        width: calc(100% - 84px);
-        margin-top: 43px;
-    }
-
-    .balance-card {
-        padding: 21px 32px 27px;
-    }
-
-    .balance-heading {
-        margin-bottom: 35px;
-    }
-
-    .balance-heading h1 {
-        font-size: clamp(25px, 4.7vw, 39px);
-    }
-
-    .wallet-label {
-        min-width: 120px;
-        font-size: 20px;
-    }
-
-    .wallet-row {
-        gap: 15px;
-        margin-bottom: 32px;
-    }
-
-    .wallet-name,
-    .wallet-amount {
-        font-size: clamp(19px, 4vw, 33px);
+    .name,
+    .amount {
+        font-size: 17px;
     }
 
     .actions {
-        gap: 31px;
-    }
-
-    .action-button {
-        height: 94px;
-        font-size: clamp(19px, 3.9vw, 32px);
         gap: 10px;
     }
 
-    .menu {
-        margin-left: -42px;
-        margin-right: -42px;
-        padding: 31px 42px 80px;
-    }
-
-    .menu-item {
-        min-height: 108px;
-        padding: 0 60px;
-        gap: 23px;
-        font-size: clamp(18px, 3.4vw, 27px);
-    }
-
-    .chat-button {
-        width: 119px;
-        height: 119px;
-        right: 27px;
-        bottom: 255px;
-    }
-}
-
-/* SMALL PHONES */
-
-@media (max-width: 430px) {
-
-    .topbar {
-        height: 220px;
-        padding: 0 6% 30px;
-    }
-
-    .navigation {
-        gap: 16px;
-    }
-
-    .home-button {
-        width: 60px;
-        height: 53px;
-        font-size: 30px;
-    }
-
-    .arrow-button {
-        margin-left: 0;
-    }
-
-    .container {
-        width: calc(100% - 32px);
-        margin-top: 26px;
-    }
-
-    .balance-card {
-        padding: 17px 15px 22px;
-    }
-
-    .balance-heading {
-        margin-bottom: 27px;
-    }
-
-    .balance-heading h1 {
-        font-size: 24px;
-        margin-top: 10px;
-    }
-
-    .wallet-label {
-        min-width: 75px;
-        padding: 10px 8px;
-        font-size: 12px;
-    }
-
-    .wallet-row {
-        gap: 7px;
-        margin-bottom: 23px;
-    }
-
-    .wallet-row:last-child {
-        margin-bottom: 7px;
-    }
-
-    .wallet-icon {
-        width: 27px;
-        font-size: 23px;
-    }
-
-    .wallet-name,
-    .wallet-amount {
-        font-size: clamp(16px, 4.1vw, 20px);
-    }
-
-    .actions {
-        gap: 12px;
-        margin-top: 15px;
-        margin-bottom: 26px;
-    }
-
-    .action-button {
-        height: 66px;
-        font-size: clamp(15px, 4vw, 19px);
-        gap: 6px;
-    }
-
-    .action-icon {
-        font-size: 22px;
-    }
-
-    .menu {
-        margin-left: -16px;
-        margin-right: -16px;
-        padding: 20px 16px 80px;
-    }
-
-    .menu-item {
-        min-height: 80px;
-        padding: 0 9px;
-        gap: 15px;
-        font-size: clamp(15px, 3.8vw, 19px);
-    }
-
-    .menu-icon {
-        width: 27px;
-        font-size: 25px;
-    }
-
-    .submenu .menu-item {
-        min-height: 62px;
-        padding-left: 42px;
+    .action {
+        height: 47px;
         font-size: 16px;
     }
 
-    .chat-button {
-        width: 82px;
-        height: 82px;
-        right: 18px;
-        bottom: 120px;
+    .item {
+        min-height: 54px;
+        padding: 0 31px;
+        gap: 12px;
+        font-size: 15px;
     }
 
-    .chat-bubble {
-        width: 39px;
-        height: 28px;
+    .item-icon {
+        width: 17px;
+        height: 17px;
     }
 
-    .online-dot {
-        width: 25px;
-        height: 25px;
-        left: 0;
-        bottom: 0;
+    .nav {
+        gap: 14px;
+    }
+
+    .nav .home {
+        width: 43px;
+        height: 34px;
+        padding: 10px;
     }
 }
 </style>
@@ -548,323 +373,216 @@ button {
 
 <body>
 
-<!-- TOP NAVIGATION -->
-
 <header class="topbar">
 
-    <button class="back-button"
-            onclick="history.back()"
-            aria-label="Go back">
-        &#8592;
+    <button class="back" aria-label="Back" onclick="history.back()">
+        <svg viewBox="0 0 24 24">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
     </button>
 
-    <nav class="navigation">
+    <nav class="nav">
 
-        <button class="home-button"
-                onclick="showMessage('Dashboard selected')"
-                aria-label="Home">
-            &#8962;
+        <button class="home" aria-label="Home" onclick="msg('Dashboard')">
+            <svg viewBox="0 0 24 24">
+                <path d="m3 10 9-7 9 7M5.5 9v12h13V9M9 21v-7h6v7"/>
+            </svg>
         </button>
 
-        <button class="arrow-button"
-                onclick="showMessage('Navigation menu selected')"
-                aria-label="Open menu">
-            &#8964;
+        <button class="down" aria-label="Menu" onclick="msg('Menu')">
+            <svg viewBox="0 0 24 24">
+                <path d="m5 9 7 7 7-7"/>
+            </svg>
         </button>
 
-        <button class="profile-button"
-                onclick="showMessage('Profile selected')"
-                aria-label="Profile">
-            &#9817;
+        <button class="user" aria-label="Profile" onclick="msg('Profile')">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="7.5" r="4"/>
+                <path d="M4 21c.7-4.2 3.5-6.5 8-6.5s7.3 2.3 8 6.5"/>
+            </svg>
         </button>
 
     </nav>
-
 </header>
 
+<main class="page">
 
-<main class="container">
+    <section class="balance">
 
-    <!-- BALANCE CARD -->
-
-    <section class="balance-card">
-
-        <div class="balance-heading">
-
+        <div class="heading">
             <h1>Account Balance</h1>
+            <span class="tag">WALLET</span>
+        </div>
 
-            <span class="wallet-label">
-                WALLET
+        <div class="wallet">
+
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 7V5a2 2 0 0 1 2-2h13v4M4 7h16a2 2 0 0 1 2 2v10H4a2 2 0 0 1-2-2V7h2Z"/>
+                    <path d="M16 12h6M18 12v.1"/>
+                </svg>
             </span>
+
+            <span class="name">Main Wallet</span>
+            <strong class="amount">$100.00</strong>
 
         </div>
 
-        <div class="wallet-row">
+        <div class="wallet">
 
-            <span class="wallet-icon">&#128179;</span>
-
-            <span class="wallet-name">
-                Main Wallet
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="m2 8 10-6 10 6H2ZM4 21h16M6 10v8M10 10v8M14 10v8M18 10v8"/>
+                </svg>
             </span>
 
-            <span class="wallet-amount">
-                $913.45
-            </span>
-
-        </div>
-
-        <div class="wallet-row">
-
-            <span class="wallet-icon">&#127963;</span>
-
-            <span class="wallet-name">
-                Profit Wallet
-            </span>
-
-            <span class="wallet-amount">
-                $261.20
-            </span>
+            <span class="name">Profit Wallet</span>
+            <strong class="amount">$5.00</strong>
 
         </div>
 
     </section>
-
-
-    <!-- DEPOSIT AND INVEST BUTTONS -->
 
     <section class="actions">
 
-        <button class="action-button deposit-button"
-                onclick="showMessage('Deposit selected')">
-
-            <span class="action-icon">&#8853;</span>
-
+        <button class="action deposit" onclick="msg('Deposit')">
+            <svg viewBox="0 0 24 24">
+                <path d="M5 2h9l6 6v14H5zM14 2v6h6M12 11v7M9 14.5h6"/>
+            </svg>
             Deposit
-
         </button>
 
-        <button class="action-button invest-button"
-                onclick="showMessage('Invest Now selected')">
-
-            <span class="action-icon">&#8680;</span>
-
+        <button class="action invest" onclick="msg('Invest Now')">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 4v16H4V4h12M13 8l4 4-4 4M17 12H9"/>
+            </svg>
             Invest Now
-
         </button>
 
     </section>
 
-
-    <!-- DASHBOARD MENU -->
-
     <section class="menu">
 
-        <button class="menu-item"
-                onclick="showMessage('Dashboard selected')">
-
-            <span class="menu-icon">&#8862;</span>
-
+        <button class="item" onclick="msg('Dashboard')">
+            <span class="item-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/>
+                </svg>
+            </span>
             <span>DASHBOARD</span>
-
         </button>
 
-
-        <button class="menu-item"
-                onclick="showMessage('All Schema selected')">
-
-            <span class="menu-icon">&#9745;</span>
-
+        <button class="item" onclick="msg('All Schema')">
+            <span class="item-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 3h18v18H3z"/>
+                    <path d="m7 12 3 3 7-7"/>
+                </svg>
+            </span>
             <span>ALL SCHEMA</span>
-
         </button>
 
-
-        <button class="menu-item"
-                onclick="showMessage('Schema Logs selected')">
-
-            <span class="menu-icon">&#9707;</span>
-
+        <button class="item" onclick="msg('Schema Logs')">
+            <span class="item-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M8 3h13v16M4 7h13v14H4z"/>
+                    <path d="M8 21l-4-4"/>
+                </svg>
+            </span>
             <span>SCHEMA LOGS</span>
-
         </button>
 
-
-        <button class="menu-item"
-                onclick="showMessage('All Transactions selected')">
-
-            <span class="menu-icon">&#9633;</span>
-
+        <button class="item" onclick="msg('All Transactions')">
+            <span class="item-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 8h18l-2 12H5L3 8ZM3 8l3-5h12l3 5M9 8a3 3 0 0 0 6 0"/>
+                </svg>
+            </span>
             <span>ALL TRANSACTIONS</span>
-
         </button>
 
-
-        <button class="menu-item"
-                onclick="showMessage('Add Money selected')">
-
-            <span class="menu-icon">&#8853;</span>
-
+        <button class="item" onclick="msg('Add Money')">
+            <span class="item-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 2h9l6 6v14H5zM14 2v6h6M12 12v7M8.5 15.5h7"/>
+                </svg>
+            </span>
             <span>ADD MONEY</span>
-
         </button>
 
-
-        <button class="menu-item"
-                onclick="showMessage('Add Money Log selected')">
-
-            <span class="menu-icon">&#8862;</span>
-
+        <button class="item" onclick="msg('Add Money Log')">
+            <span class="item-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 6h7l2 3h9v12H3zM12 12v6M9 15h6"/>
+                </svg>
+            </span>
             <span>ADD MONEY LOG</span>
-
         </button>
 
-
-        <button class="menu-item"
-                onclick="showMessage('Wallet Exchange selected')">
-
-            <span class="menu-icon">&#8644;</span>
-
+        <button class="item" onclick="msg('Wallet Exchange')">
+            <span class="item-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 8a8 8 0 0 0-14-3L3 8M3 3v5h5M4 16a8 8 0 0 0 14 3l3-3m0 5v-5h-5"/>
+                    <path d="m10 10 2-2 2 2m-2-2v8m-3-3h6"/>
+                </svg>
+            </span>
             <span>WALLET EXCHANGE</span>
-
         </button>
 
-
-        <button class="menu-item"
-                onclick="showMessage('Send Money selected')">
-
-            <span class="menu-icon">&#8680;</span>
-
+        <button class="item" onclick="msg('Send Money')">
+            <span class="item-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 4v16H4V4h12M13 8l4 4-4 4M17 12H9"/>
+                </svg>
+            </span>
             <span>SEND MONEY</span>
-
         </button>
 
-
-        <button class="menu-item"
-                onclick="showMessage('Send Money Log selected')">
-
-            <span class="menu-icon">&#9729;</span>
-
+        <button class="item" onclick="msg('Send Money Log')">
+            <span class="item-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M6 19h12a4 4 0 0 0 .4-8A6.5 6.5 0 0 0 6 9.5 4.8 4.8 0 0 0 6 19Z"/>
+                </svg>
+            </span>
             <span>SEND MONEY LOG</span>
-
         </button>
 
-
-        <!-- WITHDRAW -->
-
-        <button class="menu-item"
-                id="withdrawButton"
-                aria-expanded="true"
-                onclick="toggleWithdraw()">
-
-            <span class="menu-icon">&#127963;</span>
-
+        <button class="item" aria-expanded="true" onclick="msg('Withdraw')">
+            <span class="item-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="m2 8 10-6 10 6H2ZM4 21h16M6 10v8M10 10v8M14 10v8M18 10v8"/>
+                </svg>
+            </span>
             <span>WITHDRAW</span>
-
-            <span class="menu-arrow"
-                  id="withdrawArrow">&#9652;</span>
-
+            <span class="arrow">▴</span>
         </button>
-
-
-        <div class="submenu" id="withdrawSubmenu">
-
-            <button class="menu-item"
-                    onclick="showMessage('Withdraw Funds selected')">
-
-                <span class="menu-icon">&#8680;</span>
-
-                <span>WITHDRAW FUNDS</span>
-
-            </button>
-
-            <button class="menu-item"
-                    onclick="showMessage('Withdrawal Log selected')">
-
-                <span class="menu-icon">&#9707;</span>
-
-                <span>WITHDRAWAL LOG</span>
-
-            </button>
-
-        </div>
 
     </section>
 
 </main>
 
-
-<!-- FLOATING CHAT BUTTON -->
-
-<button class="chat-button"
-        onclick="showMessage('Chat support selected')"
-        aria-label="Chat support">
-
-    <span class="chat-bubble"></span>
-
-    <span class="online-dot"></span>
-
+<button class="chat" aria-label="Chat support" onclick="msg('Chat support')">
+    <span class="bubble"></span>
+    <span class="online"></span>
 </button>
 
-
-<!-- NOTIFICATION -->
-
-<div class="notification"
-     id="notification"
-     role="status">
-</div>
-
+<div class="toast" id="toast"></div>
 
 <script>
+let timer;
 
-let notificationTimer;
+function msg(text) {
+    const toast = document.getElementById('toast');
 
-function showMessage(message) {
+    toast.textContent = text + ' selected';
+    toast.classList.add('show');
 
-    const notification =
-        document.getElementById("notification");
+    clearTimeout(timer);
 
-    notification.textContent = message;
-
-    notification.classList.add("show");
-
-    clearTimeout(notificationTimer);
-
-    notificationTimer = setTimeout(function() {
-
-        notification.classList.remove("show");
-
-    }, 2500);
-
+    timer = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 1800);
 }
-
-
-function toggleWithdraw() {
-
-    const submenu =
-        document.getElementById("withdrawSubmenu");
-
-    const arrow =
-        document.getElementById("withdrawArrow");
-
-    const button =
-        document.getElementById("withdrawButton");
-
-    const isOpen =
-        !submenu.classList.contains("hidden");
-
-    submenu.classList.toggle("hidden", isOpen);
-
-    button.setAttribute(
-        "aria-expanded",
-        String(!isOpen)
-    );
-
-    arrow.innerHTML = isOpen
-        ? "&#9662;"
-        : "&#9652;";
-
-}
-
 </script>
 
 </body>
